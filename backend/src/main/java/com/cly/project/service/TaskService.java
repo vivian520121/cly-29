@@ -637,7 +637,7 @@ public class TaskService extends ServiceImpl<TaskMapper, Task> {
 
         saveTaskTags(taskId, newTagIds);
 
-        if (!CollectionUtils.isEqualCollection(oldTagIds, newTagIds)) {
+        if (!isEqualCollection(oldTagIds, newTagIds)) {
             String oldTagsStr = oldTags.stream()
                     .map(TaskTag::getTagName)
                     .collect(Collectors.joining(","));
@@ -683,5 +683,18 @@ public class TaskService extends ServiceImpl<TaskMapper, Task> {
     private String getUserName(Long userId) {
         User user = userMapper.selectById(userId);
         return user != null ? user.getRealName() : userId.toString();
+    }
+
+    private boolean isEqualCollection(List<?> a, List<?> b) {
+        if (a == null && b == null) {
+            return true;
+        }
+        if (a == null || b == null) {
+            return false;
+        }
+        if (a.size() != b.size()) {
+            return false;
+        }
+        return a.containsAll(b) && b.containsAll(a);
     }
 }
