@@ -268,7 +268,7 @@ class AuthServiceTest {
             LoginVO result = authService.login(loginDTO);
 
             assertNotNull(result);
-            assertEquals(UserTypeEnum.NORMAL.getCode(), result.getUserType());
+            assertEquals(UserTypeEnum.USER.getCode(), result.getUserType());
         }
     }
 
