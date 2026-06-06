@@ -23,12 +23,12 @@ public class MilestoneService extends ServiceImpl<MilestoneMapper, Milestone> {
     }
 
     @Transactional
-    public void save(Milestone milestone) {
+    public void saveMilestone(Milestone milestone) {
         baseMapper.insert(milestone);
     }
 
     @Transactional
-    public void update(Milestone milestone) {
+    public void updateMilestone(Milestone milestone) {
         Milestone existingMilestone = baseMapper.selectById(milestone.getId());
         if (existingMilestone == null) {
             throw new BusinessException("里程碑不存在");
@@ -37,7 +37,7 @@ public class MilestoneService extends ServiceImpl<MilestoneMapper, Milestone> {
     }
 
     @Transactional
-    public void remove(Long id) {
+    public void removeMilestone(Long id) {
         Milestone existingMilestone = baseMapper.selectById(id);
         if (existingMilestone == null) {
             throw new BusinessException("里程碑不存在");

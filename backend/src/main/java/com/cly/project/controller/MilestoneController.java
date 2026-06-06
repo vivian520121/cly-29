@@ -30,7 +30,7 @@ public class MilestoneController {
     @Operation(summary = "新增里程碑")
     @OperationLog(module = "里程碑管理", operation = "新增里程碑", businessType = "INSERT")
     public Result<Void> save(@RequestBody Milestone milestone) {
-        milestoneService.save(milestone);
+        milestoneService.saveMilestone(milestone);
         return Result.success();
     }
 
@@ -38,7 +38,7 @@ public class MilestoneController {
     @Operation(summary = "修改里程碑")
     @OperationLog(module = "里程碑管理", operation = "修改里程碑", businessType = "UPDATE")
     public Result<Void> update(@RequestBody Milestone milestone) {
-        milestoneService.update(milestone);
+        milestoneService.updateMilestone(milestone);
         return Result.success();
     }
 
@@ -46,7 +46,7 @@ public class MilestoneController {
     @Operation(summary = "删除里程碑")
     @OperationLog(module = "里程碑管理", operation = "删除里程碑", businessType = "DELETE", businessIdIndex = 0)
     public Result<Void> delete(@PathVariable Long id) {
-        milestoneService.remove(id);
+        milestoneService.removeMilestone(id);
         return Result.success();
     }
 }

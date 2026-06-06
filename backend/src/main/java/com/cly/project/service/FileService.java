@@ -264,7 +264,7 @@ public class FileService extends ServiceImpl<FileInfoMapper, FileInfo> {
                 .collect(Collectors.toList());
     }
 
-    public FileInfo getById(Long id) {
+    public FileInfo getFileById(Long id) {
         FileInfo fileInfo = fileInfoMapper.selectById(id);
         if (fileInfo == null) {
             return null;
@@ -347,7 +347,7 @@ public class FileService extends ServiceImpl<FileInfoMapper, FileInfo> {
     }
 
     @Transactional
-    public void remove(Long id) {
+    public void removeFile(Long id) {
         FileInfo fileInfo = fileInfoMapper.selectById(id);
         if (fileInfo == null) {
             throw new BusinessException("文件不存在");

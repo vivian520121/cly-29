@@ -27,12 +27,12 @@ public class ProjectPhaseService extends ServiceImpl<ProjectPhaseMapper, Project
     }
 
     @Transactional
-    public void save(ProjectPhase phase) {
+    public void savePhase(ProjectPhase phase) {
         baseMapper.insert(phase);
     }
 
     @Transactional
-    public void update(ProjectPhase phase) {
+    public void updatePhase(ProjectPhase phase) {
         ProjectPhase existingPhase = baseMapper.selectById(phase.getId());
         if (existingPhase == null) {
             throw new BusinessException("项目阶段不存在");
@@ -41,7 +41,7 @@ public class ProjectPhaseService extends ServiceImpl<ProjectPhaseMapper, Project
     }
 
     @Transactional
-    public void remove(Long id) {
+    public void removePhase(Long id) {
         ProjectPhase existingPhase = baseMapper.selectById(id);
         if (existingPhase == null) {
             throw new BusinessException("项目阶段不存在");

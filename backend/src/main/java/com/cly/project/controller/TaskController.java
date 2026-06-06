@@ -44,7 +44,7 @@ public class TaskController {
     @Operation(summary = "查询任务详情")
     @OperationLog(module = "任务管理", operation = "查询任务详情", businessType = "QUERY", businessIdIndex = 0)
     public Result<TaskDetailVO> getById(@PathVariable Long id) {
-        return Result.success(taskService.getById(id));
+        return Result.success(taskService.getDetailById(id));
     }
 
     @GetMapping("/tree/{projectId}")

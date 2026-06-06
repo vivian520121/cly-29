@@ -90,7 +90,7 @@ public class TaskService extends ServiceImpl<TaskMapper, Task> {
         return columns;
     }
 
-    public TaskDetailVO getById(Long id) {
+    public TaskDetailVO getDetailById(Long id) {
         Task task = baseMapper.selectById(id);
         if (task == null) {
             return null;

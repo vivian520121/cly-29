@@ -3,10 +3,13 @@ package com.cly.project.controller;
 import com.cly.project.common.Result;
 import com.cly.project.dto.TaskQueryDTO;
 import com.cly.project.dto.TaskSaveDTO;
+import com.cly.project.dto.TaskStatusUpdateDTO;
 import com.cly.project.entity.Task;
 import com.cly.project.enums.TaskPriorityEnum;
 import com.cly.project.enums.TaskStatusEnum;
 import com.cly.project.service.TaskService;
+import com.cly.project.vo.KanbanColumnVO;
+import com.cly.project.vo.TaskDetailVO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -42,6 +45,7 @@ class TaskControllerTest {
 
     private Task testTask;
     private TaskSaveDTO taskSaveDTO;
+    private TaskDetailVO testTaskDetail;
 
     @BeforeEach
     void setUp() {
@@ -49,7 +53,7 @@ class TaskControllerTest {
         testTask.setId(1L);
         testTask.setProjectId(1L);
         testTask.setTaskName("测试任务");
-        testTask.setTaskNo("TASK-001");
+        testTask.setTaskNo("TASK_000001");
         testTask.setDescription("这是一个测试任务");
         testTask.setTaskType(2);
         testTask.setStatus(TaskStatusEnum.TODO.getCode());
@@ -60,6 +64,14 @@ class TaskControllerTest {
         testTask.setEndDate(LocalDate.now().plusDays(7));
         testTask.setEstimateHours(new BigDecimal("40"));
         testTask.setProgress(0);
+
+        testTaskDetail = new TaskDetailVO();
+        testTaskDetail.setId(1L);
+        testTaskDetail.setProjectId(1L);
+        testTaskDetail.setTaskName("测试任务");
+        testTaskDetail.setTaskNo("TASK_000001");
+        testTaskDetail.setDescription("这是一个测试任务");
+        testTaskDetail.setStatus(TaskStatusEnum.TODO.getCode());
 
         taskSaveDTO = new TaskSaveDTO();
         taskSaveDTO.setProjectId(1L);
@@ -77,7 +89,7 @@ class TaskControllerTest {
     @Test
     @DisplayName("获取任务详情")
     void testGetTaskDetail() throws Exception {
-        when(taskService.getDetail(1L)).thenReturn(testTask);
+        when(taskService.getDetailById(1L)).thenReturn(testTaskDetail);
 
         mockMvc.perform(MockMvcRequestBuilders.get("/task/{id}", 1L)
                 .contentType(MediaType.APPLICATION_JSON))
@@ -87,22 +99,21 @@ class TaskControllerTest {
                 .andExpect(jsonPath("$.data.taskName").value("测试任务"))
                 .andExpect(jsonPath("$.data.status").value(TaskStatusEnum.TODO.getCode()));
 
-        verify(taskService, times(1)).getDetail(1L);
+        verify(taskService, times(1)).getDetailById(1L);
     }
 
     @Test
     @DisplayName("创建任务")
     void testCreateTask() throws Exception {
-        when(taskService.save(any(TaskSaveDTO.class))).thenReturn(true);
+        doNothing().when(taskService).saveTask(any(TaskSaveDTO.class));
 
         mockMvc.perform(MockMvcRequestBuilders.post("/task")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(taskSaveDTO)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.code").value(200))
-                .andExpect(jsonPath("$.data").value(true));
+                .andExpect(jsonPath("$.code").value(200));
 
-        verify(taskService, times(1)).save(any(TaskSaveDTO.class));
+        verify(taskService, times(1)).saveTask(any(TaskSaveDTO.class));
     }
 
     @Test
@@ -110,30 +121,28 @@ class TaskControllerTest {
     void testUpdateTask() throws Exception {
         taskSaveDTO.setId(1L);
         taskSaveDTO.setTaskName("更新后的任务");
-        when(taskService.update(any(TaskSaveDTO.class))).thenReturn(true);
+        doNothing().when(taskService).updateTask(any(TaskSaveDTO.class));
 
         mockMvc.perform(MockMvcRequestBuilders.put("/task")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(taskSaveDTO)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.code").value(200))
-                .andExpect(jsonPath("$.data").value(true));
+                .andExpect(jsonPath("$.code").value(200));
 
-        verify(taskService, times(1)).update(any(TaskSaveDTO.class));
+        verify(taskService, times(1)).updateTask(any(TaskSaveDTO.class));
     }
 
     @Test
     @DisplayName("删除任务")
     void testDeleteTask() throws Exception {
-        when(taskService.removeById(1L)).thenReturn(true);
+        doNothing().when(taskService).removeTask(1L);
 
         mockMvc.perform(MockMvcRequestBuilders.delete("/task/{id}", 1L)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.code").value(200))
-                .andExpect(jsonPath("$.data").value(true));
+                .andExpect(jsonPath("$.code").value(200));
 
-        verify(taskService, times(1)).removeById(1L);
+        verify(taskService, times(1)).removeTask(1L);
     }
 
     @Test
@@ -167,63 +176,85 @@ class TaskControllerTest {
     @Test
     @DisplayName("更新任务状态")
     void testUpdateTaskStatus() throws Exception {
-        when(taskService.updateStatus(1L, TaskStatusEnum.IN_PROGRESS.getCode())).thenReturn(true);
+        TaskStatusUpdateDTO statusDTO = new TaskStatusUpdateDTO();
+        statusDTO.setTaskId(1L);
+        statusDTO.setStatus(TaskStatusEnum.IN_PROGRESS.getCode());
+        statusDTO.setRemark("开始处理");
 
-        mockMvc.perform(MockMvcRequestBuilders.put("/task/{id}/status", 1L)
-                .param("status", String.valueOf(TaskStatusEnum.IN_PROGRESS.getCode()))
-                .contentType(MediaType.APPLICATION_JSON))
+        doNothing().when(taskService).updateStatus(any(TaskStatusUpdateDTO.class));
+
+        mockMvc.perform(MockMvcRequestBuilders.put("/task/status")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(statusDTO)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.code").value(200))
-                .andExpect(jsonPath("$.data").value(true));
+                .andExpect(jsonPath("$.code").value(200));
 
-        verify(taskService, times(1)).updateStatus(1L, TaskStatusEnum.IN_PROGRESS.getCode());
+        verify(taskService, times(1)).updateStatus(any(TaskStatusUpdateDTO.class));
     }
 
     @Test
-    @DisplayName("更新任务进度")
-    void testUpdateTaskProgress() throws Exception {
-        when(taskService.updateProgress(1L, 50)).thenReturn(true);
+    @DisplayName("更新任务排序")
+    void testUpdateTaskOrder() throws Exception {
+        doNothing().when(taskService).updateTaskOrder(1L, 5);
 
-        mockMvc.perform(MockMvcRequestBuilders.put("/task/{id}/progress", 1L)
-                .param("progress", "50")
+        mockMvc.perform(MockMvcRequestBuilders.put("/task/order")
+                .param("taskId", "1")
+                .param("sortOrder", "5")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.code").value(200))
-                .andExpect(jsonPath("$.data").value(true));
+                .andExpect(jsonPath("$.code").value(200));
 
-        verify(taskService, times(1)).updateProgress(1L, 50);
+        verify(taskService, times(1)).updateTaskOrder(1L, 5);
     }
 
     @Test
-    @DisplayName("获取项目任务列表")
-    void testGetProjectTasks() throws Exception {
-        List<Task> tasks = Arrays.asList(testTask);
-        when(taskService.getByProjectId(1L)).thenReturn(tasks);
+    @DisplayName("获取看板数据")
+    void testGetKanbanData() throws Exception {
+        KanbanColumnVO columnVO = new KanbanColumnVO();
+        columnVO.setStatus(TaskStatusEnum.TODO.getCode());
+        columnVO.setStatusName("待办");
+        columnVO.setStatusColor("blue");
+        columnVO.setTasks(Arrays.asList(testTask));
+        columnVO.setTotal(1L);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/task/list")
+        when(taskService.getKanbanData(any(TaskQueryDTO.class))).thenReturn(Arrays.asList(columnVO));
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/task/kanban")
                 .param("projectId", "1")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.code").value(200))
+                .andExpect(jsonPath("$.data[0].status").value(TaskStatusEnum.TODO.getCode()));
+
+        verify(taskService, times(1)).getKanbanData(any(TaskQueryDTO.class));
+    }
+
+    @Test
+    @DisplayName("获取任务树")
+    void testGetTaskTree() throws Exception {
+        when(taskService.getTree(1L)).thenReturn(Arrays.asList(testTask));
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/task/tree/{projectId}", 1L)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.code").value(200))
                 .andExpect(jsonPath("$.data[0].taskName").value("测试任务"));
 
-        verify(taskService, times(1)).getByProjectId(1L);
+        verify(taskService, times(1)).getTree(1L);
     }
 
     @Test
-    @DisplayName("批量删除任务")
-    void testBatchDeleteTasks() throws Exception {
-        List<Long> ids = Arrays.asList(1L, 2L, 3L);
-        when(taskService.removeByIds(ids)).thenReturn(true);
+    @DisplayName("获取我的任务")
+    void testGetMyTasks() throws Exception {
+        when(taskService.getMyTasks()).thenReturn(Arrays.asList(testTask));
 
-        mockMvc.perform(MockMvcRequestBuilders.delete("/task/batch")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(ids)))
+        mockMvc.perform(MockMvcRequestBuilders.get("/task/my")
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.code").value(200))
-                .andExpect(jsonPath("$.data").value(true));
+                .andExpect(jsonPath("$.data[0].taskName").value("测试任务"));
 
-        verify(taskService, times(1)).removeByIds(ids);
+        verify(taskService, times(1)).getMyTasks();
     }
 
     @Test

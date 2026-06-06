@@ -80,7 +80,7 @@ public class FileController {
     @Operation(summary = "获取文件详情")
     @OperationLog(module = "文件管理", operation = "查询文件详情", businessType = "QUERY", businessIdIndex = 0)
     public Result<FileInfo> getById(@PathVariable Long id) {
-        return Result.success(fileService.getById(id));
+        return Result.success(fileService.getFileById(id));
     }
 
     @GetMapping("/{id}/preview")
@@ -101,7 +101,7 @@ public class FileController {
     @Operation(summary = "删除文件")
     @OperationLog(module = "文件管理", operation = "删除文件", businessType = "DELETE", businessIdIndex = 0)
     public Result<Void> remove(@PathVariable Long id) {
-        fileService.remove(id);
+        fileService.removeFile(id);
         return Result.success();
     }
 }

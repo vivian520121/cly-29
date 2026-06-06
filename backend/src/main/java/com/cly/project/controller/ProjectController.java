@@ -43,7 +43,7 @@ public class ProjectController {
     @Operation(summary = "新增项目")
     @OperationLog(module = "项目管理", operation = "新增项目", businessType = "INSERT")
     public Result<Void> save(@RequestBody @Valid ProjectSaveDTO dto) {
-        projectService.save(dto);
+        projectService.saveProject(dto);
         return Result.success();
     }
 
@@ -51,7 +51,7 @@ public class ProjectController {
     @Operation(summary = "修改项目")
     @OperationLog(module = "项目管理", operation = "修改项目", businessType = "UPDATE")
     public Result<Void> update(@RequestBody @Valid ProjectSaveDTO dto) {
-        projectService.update(dto);
+        projectService.updateProject(dto);
         return Result.success();
     }
 
@@ -59,7 +59,7 @@ public class ProjectController {
     @Operation(summary = "删除项目")
     @OperationLog(module = "项目管理", operation = "删除项目", businessType = "DELETE", businessIdIndex = 0)
     public Result<Void> delete(@PathVariable Long id) {
-        projectService.remove(id);
+        projectService.removeProject(id);
         return Result.success();
     }
 

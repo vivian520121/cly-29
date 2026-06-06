@@ -114,7 +114,7 @@ public class ProjectService extends ServiceImpl<ProjectMapper, Project> {
     }
 
     @Transactional
-    public void save(ProjectSaveDTO dto) {
+    public void saveProject(ProjectSaveDTO dto) {
         LambdaQueryWrapper<Project> codeWrapper = new LambdaQueryWrapper<>();
         codeWrapper.eq(Project::getProjectCode, dto.getProjectCode());
         Long count = baseMapper.selectCount(codeWrapper);
@@ -153,7 +153,7 @@ public class ProjectService extends ServiceImpl<ProjectMapper, Project> {
     }
 
     @Transactional
-    public void update(ProjectSaveDTO dto) {
+    public void updateProject(ProjectSaveDTO dto) {
         Project existingProject = baseMapper.selectById(dto.getId());
         if (existingProject == null) {
             throw new BusinessException("项目不存在");
@@ -201,7 +201,7 @@ public class ProjectService extends ServiceImpl<ProjectMapper, Project> {
     }
 
     @Transactional
-    public void remove(Long id) {
+    public void removeProject(Long id) {
         Project existingProject = baseMapper.selectById(id);
         if (existingProject == null) {
             throw new BusinessException("项目不存在");

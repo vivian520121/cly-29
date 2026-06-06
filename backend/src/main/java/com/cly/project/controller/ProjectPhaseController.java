@@ -30,7 +30,7 @@ public class ProjectPhaseController {
     @Operation(summary = "新增项目阶段")
     @OperationLog(module = "项目阶段管理", operation = "新增项目阶段", businessType = "INSERT")
     public Result<Void> save(@RequestBody ProjectPhase phase) {
-        projectPhaseService.save(phase);
+        projectPhaseService.savePhase(phase);
         return Result.success();
     }
 
@@ -38,7 +38,7 @@ public class ProjectPhaseController {
     @Operation(summary = "修改项目阶段")
     @OperationLog(module = "项目阶段管理", operation = "修改项目阶段", businessType = "UPDATE")
     public Result<Void> update(@RequestBody ProjectPhase phase) {
-        projectPhaseService.update(phase);
+        projectPhaseService.updatePhase(phase);
         return Result.success();
     }
 
@@ -46,7 +46,7 @@ public class ProjectPhaseController {
     @Operation(summary = "删除项目阶段")
     @OperationLog(module = "项目阶段管理", operation = "删除项目阶段", businessType = "DELETE", businessIdIndex = 0)
     public Result<Void> delete(@PathVariable Long id) {
-        projectPhaseService.remove(id);
+        projectPhaseService.removePhase(id);
         return Result.success();
     }
 }
