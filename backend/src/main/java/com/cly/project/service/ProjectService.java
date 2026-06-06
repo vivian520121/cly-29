@@ -57,11 +57,16 @@ public class ProjectService extends ServiceImpl<ProjectMapper, Project> {
         }
 
         if (StringUtils.hasText(query.getKeyword())) {
-            wrapper.and(w -> w.like(Project::getProjectName, query.getKeyword())
-                    .or()
-                    .like(Project::getProjectCode, query.getKeyword())
-                    .or()
-                    .like(Project::getDescription, query.getKeyword()));
+            wrapper.and(new java.util.function.Consumer<LambdaQueryWrapper<Project>>() {
+                @Override
+                public void accept(LambdaQueryWrapper<Project> w) {
+                    w.like(Project::getProjectName, query.getKeyword())
+                            .or()
+                            .like(Project::getProjectCode, query.getKeyword())
+                            .or()
+                            .like(Project::getDescription, query.getKeyword());
+                }
+            });
         }
         if (query.getStatus() != null) {
             wrapper.eq(Project::getStatus, query.getStatus());

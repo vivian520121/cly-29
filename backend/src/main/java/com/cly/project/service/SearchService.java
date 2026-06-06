@@ -51,18 +51,18 @@ public class SearchService {
 
         List<Project> projects = projectMapper.selectList(wrapper);
 
-        return projects.stream()
-                .map(project -> {
-                    SearchResultVO<Project> vo = new SearchResultVO<>();
-                    vo.setType("project");
-                    vo.setTypeName("项目");
-                    vo.setTitle(project.getProjectName());
-                    vo.setDescription(project.getDescription());
-                    vo.setUrl("/project/" + project.getId());
-                    vo.setData(project);
-                    return vo;
-                })
-                .collect(Collectors.toList());
+        List<SearchResultVO<Project>> projectResults = new ArrayList<>();
+        for (Project project : projects) {
+            SearchResultVO<Project> vo = new SearchResultVO<>();
+            vo.setType("project");
+            vo.setTypeName("项目");
+            vo.setTitle(project.getProjectName());
+            vo.setDescription(project.getDescription());
+            vo.setUrl("/project/" + project.getId());
+            vo.setData(project);
+            projectResults.add(vo);
+        }
+        return projectResults;
     }
 
     public List<SearchResultVO<Task>> searchTasks(String keyword) {
@@ -82,17 +82,17 @@ public class SearchService {
 
         List<Task> tasks = taskMapper.selectList(wrapper);
 
-        return tasks.stream()
-                .map(task -> {
-                    SearchResultVO<Task> vo = new SearchResultVO<>();
-                    vo.setType("task");
-                    vo.setTypeName("任务");
-                    vo.setTitle(task.getTaskName());
-                    vo.setDescription(task.getDescription());
-                    vo.setUrl("/task/" + task.getId());
-                    vo.setData(task);
-                    return vo;
-                })
-                .collect(Collectors.toList());
+        List<SearchResultVO<Task>> taskResults = new ArrayList<>();
+        for (Task task : tasks) {
+            SearchResultVO<Task> vo = new SearchResultVO<>();
+            vo.setType("task");
+            vo.setTypeName("任务");
+            vo.setTitle(task.getTaskName());
+            vo.setDescription(task.getDescription());
+            vo.setUrl("/task/" + task.getId());
+            vo.setData(task);
+            taskResults.add(vo);
+        }
+        return taskResults;
     }
 }

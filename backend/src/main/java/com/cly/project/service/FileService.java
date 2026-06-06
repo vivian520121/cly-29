@@ -198,10 +198,13 @@ public class FileService extends ServiceImpl<FileInfoMapper, FileInfo> {
             }
 
             List<File> sortedChunks = Arrays.stream(chunkFiles)
-                    .sorted((f1, f2) -> {
-                        int idx1 = Integer.parseInt(f1.getName().replace(".part", ""));
-                        int idx2 = Integer.parseInt(f2.getName().replace(".part", ""));
-                        return idx1 - idx2;
+                    .sorted(new java.util.Comparator<File>() {
+                        @Override
+                        public int compare(File f1, File f2) {
+                            int idx1 = Integer.parseInt(f1.getName().replace(".part", ""));
+                            int idx2 = Integer.parseInt(f2.getName().replace(".part", ""));
+                            return idx1 - idx2;
+                        }
                     })
                     .collect(Collectors.toList());
 

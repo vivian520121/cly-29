@@ -454,11 +454,16 @@ public class TaskService extends ServiceImpl<TaskMapper, Task> {
         LambdaQueryWrapper<Task> wrapper = new LambdaQueryWrapper<>();
 
         if (StringUtils.hasText(query.getKeyword())) {
-            wrapper.and(w -> w.like(Task::getTaskName, query.getKeyword())
-                    .or()
-                    .like(Task::getTaskNo, query.getKeyword())
-                    .or()
-                    .like(Task::getDescription, query.getKeyword()));
+            wrapper.and(new java.util.function.Consumer<LambdaQueryWrapper<Task>>() {
+                @Override
+                public void accept(LambdaQueryWrapper<Task> w) {
+                    w.like(Task::getTaskName, query.getKeyword())
+                            .or()
+                            .like(Task::getTaskNo, query.getKeyword())
+                            .or()
+                            .like(Task::getDescription, query.getKeyword());
+                }
+            });
         }
 
         if (query.getProjectId() != null) {
@@ -523,33 +528,33 @@ public class TaskService extends ServiceImpl<TaskMapper, Task> {
                 .collect(Collectors.toList());
         List<Long> userIds = new ArrayList<>();
 
-        tasks.forEach(task -> {
+        for (Task task : tasks) {
             if (task.getAssigneeId() != null) {
                 userIds.add(task.getAssigneeId());
             }
             if (task.getCreatorId() != null) {
                 userIds.add(task.getCreatorId());
             }
-        });
+        }
         userIds = userIds.stream().distinct().collect(Collectors.toList());
 
         if (!projectIds.isEmpty()) {
             List<Project> projects = projectMapper.selectBatchIds(projectIds);
             Map<Long, Project> projectMap = projects.stream()
                     .collect(Collectors.toMap(Project::getId, p -> p));
-            tasks.forEach(task -> {
+            for (Task task : tasks) {
                 Project project = projectMap.get(task.getProjectId());
                 if (project != null) {
                     task.setProjectName(project.getProjectName());
                 }
-            });
+            }
         }
 
         if (!userIds.isEmpty()) {
             List<User> users = userMapper.selectBatchIds(userIds);
             Map<Long, User> userMap = users.stream()
                     .collect(Collectors.toMap(User::getId, u -> u));
-            tasks.forEach(task -> {
+            for (Task task : tasks) {
                 User assignee = userMap.get(task.getAssigneeId());
                 if (assignee != null) {
                     task.setAssigneeName(assignee.getRealName());
@@ -559,7 +564,7 @@ public class TaskService extends ServiceImpl<TaskMapper, Task> {
                 if (creator != null) {
                     task.setCreatorName(creator.getRealName());
                 }
-            });
+            }
         }
 
         List<Long> taskIds = tasks.stream().map(Task::getId).collect(Collectors.toList());

@@ -16,12 +16,13 @@ public class TreeUtil {
             return new ArrayList<>();
         }
 
-        List<T> roots = list.stream()
-                .filter(item -> {
-                    Long parentId = getParentId(item);
-                    return Objects.equals(parentId, rootId);
-                })
-                .collect(Collectors.toList());
+        List<T> roots = new ArrayList<>();
+        for (T item : list) {
+            Long parentId = getParentId(item);
+            if (Objects.equals(parentId, rootId)) {
+                roots.add(item);
+            }
+        }
 
         for (T root : roots) {
             buildChildren(root, list);
@@ -32,12 +33,13 @@ public class TreeUtil {
 
     private static <T> void buildChildren(T parent, List<T> list) {
         Long parentId = getId(parent);
-        List<T> children = list.stream()
-                .filter(item -> {
-                    Long itemParentId = getParentId(item);
-                    return Objects.equals(itemParentId, parentId);
-                })
-                .collect(Collectors.toList());
+        List<T> children = new ArrayList<>();
+        for (T item : list) {
+            Long itemParentId = getParentId(item);
+            if (Objects.equals(itemParentId, parentId)) {
+                children.add(item);
+            }
+        }
 
         if (!children.isEmpty()) {
             setChildren(parent, children);
