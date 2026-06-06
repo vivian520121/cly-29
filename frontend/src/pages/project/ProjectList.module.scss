@@ -1,0 +1,113 @@
+.projectList {
+  padding: 24px;
+}
+
+.filterCard {
+  margin-bottom: 16px;
+  border-radius: 8px;
+
+  :global(.ant-card-body) {
+    padding: 16px 24px;
+  }
+}
+
+.loadingContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+}
+
+.projectGrid {
+  margin-top: 16px;
+}
+
+.projectCard {
+  border-radius: 8px;
+  height: 100%;
+  cursor: pointer;
+
+  :global(.ant-card-body) {
+    padding: 20px;
+  }
+
+  :global(.ant-card-actions) {
+    border-top: 1px solid #f0f0f0;
+
+    li {
+      cursor: pointer;
+
+      &:hover {
+        color: #1890ff;
+      }
+    }
+  }
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.projectName {
+  font-size: 16px;
+  font-weight: 600;
+  color: #262626;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.projectDesc {
+  font-size: 13px;
+  color: #8c8c8c;
+  line-height: 1.6;
+  margin-bottom: 16px;
+  min-height: 40px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.projectMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.metaItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #595959;
+
+  svg {
+    font-size: 14px;
+    color: #8c8c8c;
+  }
+}
+
+.projectProgress {
+  padding-top: 12px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.progressHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  font-size: 13px;
+  color: #595959;
+}
+
+.empty {
+  padding: 60px 0;
+}

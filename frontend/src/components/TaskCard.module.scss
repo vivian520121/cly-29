@@ -1,0 +1,91 @@
+.taskCard {
+  margin-bottom: 12px;
+  cursor: pointer;
+  border-radius: 8px;
+
+  :global(.ant-card-body) {
+    padding: 16px;
+  }
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.taskTitle {
+  flex: 1;
+  font-size: 15px;
+  font-weight: 500;
+  color: #262626;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.taskMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.metaItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #595959;
+
+  svg {
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+}
+
+.metaLabel {
+  color: #8c8c8c;
+  flex-shrink: 0;
+}
+
+.metaTag {
+  margin: 0;
+}
+
+.assigneeAvatar {
+  flex-shrink: 0;
+}
+
+.dueDate {
+  font-size: 13px;
+}
+
+.overdue {
+  color: #ff4d4f !important;
+}
+
+.taskDesc {
+  font-size: 13px;
+  color: #8c8c8c;
+  line-height: 1.6;
+  margin-bottom: 12px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.taskTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+
+  :global(.ant-tag) {
+    margin: 0;
+  }
+}

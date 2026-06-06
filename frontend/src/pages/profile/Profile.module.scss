@@ -1,0 +1,130 @@
+.profile {
+  padding: 24px;
+}
+
+.loadingContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+}
+
+.profileHeader {
+  margin-bottom: 16px;
+  border-radius: 8px;
+}
+
+.avatarSection {
+  text-align: center;
+}
+
+.avatarWrapper {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 16px;
+}
+
+.avatarOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  opacity: 0;
+  transition: opacity 0.3s;
+  cursor: pointer;
+  font-size: 12px;
+
+  svg {
+    font-size: 24px;
+    margin-bottom: 4px;
+  }
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.userName {
+  font-size: 24px;
+  font-weight: 600;
+  color: #262626;
+  margin: 0 0 8px 0;
+}
+
+.userType {
+  margin: 0;
+}
+
+.infoSection {
+  padding: 0 24px;
+  border-left: 1px solid #f0f0f0;
+  border-right: 1px solid #f0f0f0;
+}
+
+.infoGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.infoItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+
+  svg {
+    color: #8c8c8c;
+    width: 16px;
+  }
+}
+
+.infoLabel {
+  color: #8c8c8c;
+  width: 70px;
+}
+
+.infoValue {
+  color: #262626;
+  flex: 1;
+}
+
+.actionSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.contentCard {
+  border-radius: 8px;
+
+  :global(.ant-tabs-nav) {
+    padding: 0 24px;
+    margin: 0;
+  }
+
+  :global(.ant-tabs-content-holder) {
+    padding: 24px;
+  }
+}
+
+.statsRow {
+  margin-bottom: 0;
+}
+
+.projectMeta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 13px;
+  color: #8c8c8c;
+  margin-top: 8px;
+}

@@ -1,0 +1,93 @@
+.loginCard {
+  width: 100%;
+  max-width: 440px;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+
+  :global(.ant-card-body) {
+    padding: 40px;
+  }
+}
+
+.loginHeader {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #262626;
+  margin-bottom: 8px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #8c8c8c;
+  margin: 0;
+}
+
+.inputIcon {
+  color: #bfbfbf;
+}
+
+.loginOptions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.checkboxGroup {
+  display: flex;
+  gap: 16px;
+}
+
+.forgotPassword {
+  color: #1890ff;
+  font-size: 14px;
+
+  &:hover {
+    color: #40a9ff;
+  }
+}
+
+.loginBtn {
+  height: 44px;
+  font-size: 16px;
+  font-weight: 500;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  border-radius: 8px;
+
+  &:hover {
+    background: linear-gradient(135deg, #5568d3 0%, #654091 100%);
+  }
+}
+
+.loginFooter {
+  text-align: center;
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid #f0f0f0;
+
+  p {
+    margin: 0;
+    font-size: 14px;
+    color: #8c8c8c;
+
+    a {
+      color: #1890ff;
+      margin-left: 4px;
+
+      &:hover {
+        color: #40a9ff;
+      }
+    }
+  }
+}

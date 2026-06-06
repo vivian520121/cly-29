@@ -1,0 +1,34 @@
+.fileUploader {
+  width: 100%;
+}
+
+.uploadProgress {
+  margin-top: 16px;
+  padding: 16px;
+  background: #f6ffed;
+  border: 1px solid #b7eb8f;
+  border-radius: 8px;
+}
+
+.fileName {
+  font-size: 14px;
+  font-weight: 500;
+  color: #262626;
+  margin-bottom: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.progressInfo {
+  margin-top: 8px;
+  text-align: center;
+  font-size: 13px;
+  color: #52c41a;
+  font-weight: 500;
+}
+
+.uploadBtn {
+  margin-top: 16px;
+  text-align: center;
+}

@@ -1,0 +1,83 @@
+.searchInput {
+  width: 100%;
+  max-width: 400px;
+
+  :global(.ant-input-prefix) {
+    color: #bfbfbf;
+  }
+}
+
+.searchDropdown {
+  width: 400px;
+  max-height: 500px;
+  overflow-y: auto;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 8px 0;
+}
+
+.searchLoading {
+  padding: 24px;
+  text-align: center;
+  color: #8c8c8c;
+}
+
+.searchEmpty {
+  padding: 24px;
+  text-align: center;
+  color: #8c8c8c;
+}
+
+.searchGroup {
+  padding: 8px 0;
+}
+
+.searchGroupTitle {
+  padding: 4px 16px;
+  font-size: 12px;
+  color: #8c8c8c;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.searchItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: #f5f5f5;
+  }
+}
+
+.searchItemTitle {
+  flex: 1;
+  font-size: 14px;
+  color: #262626;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.searchItemTag {
+  flex-shrink: 0;
+}
+
+.searchAllBtn {
+  padding: 12px 16px;
+  text-align: center;
+  color: #1890ff;
+  cursor: pointer;
+  border-top: 1px solid #f0f0f0;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: #f5f5f5;
+  }
+}

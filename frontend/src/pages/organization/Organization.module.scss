@@ -1,0 +1,73 @@
+.organization {
+  padding: 24px;
+}
+
+.headerActions {
+  display: flex;
+  gap: 12px;
+}
+
+.treeCard {
+  border-radius: 8px;
+  height: calc(100vh - 64px - 48px - 24px);
+  overflow: auto;
+}
+
+.tableCard {
+  border-radius: 8px;
+
+  :global(.ant-card-body) {
+    padding: 0;
+  }
+}
+
+.loadingContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+}
+
+.deptTree {
+  :global(.ant-tree-node-content-wrapper) {
+    width: 100%;
+  }
+}
+
+.treeNode {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 4px 0;
+
+  span {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.treeActions {
+  display: none;
+  gap: 4px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+:global(.ant-tree-node-content-wrapper:hover) .treeActions {
+  display: flex;
+  opacity: 1;
+}
+
+.userName {
+  font-size: 14px;
+  font-weight: 500;
+  color: #262626;
+}
+
+.userEmail {
+  font-size: 12px;
+  color: #8c8c8c;
+}

@@ -1,0 +1,43 @@
+.taskList {
+  padding: 24px;
+}
+
+.headerActions {
+  display: flex;
+  gap: 12px;
+}
+
+.filterCard {
+  margin-bottom: 16px;
+  border-radius: 8px;
+
+  :global(.ant-card-body) {
+    padding: 16px 24px;
+  }
+}
+
+.tableCard {
+  border-radius: 8px;
+
+  :global(.ant-card-body) {
+    padding: 0;
+  }
+
+  :global(.ant-table) {
+    border-radius: 8px;
+  }
+}
+
+.taskName {
+  color: #262626;
+  font-weight: 500;
+
+  &:hover {
+    color: #1890ff;
+  }
+}
+
+.projectName {
+  color: #595959;
+  font-size: 13px;
+}

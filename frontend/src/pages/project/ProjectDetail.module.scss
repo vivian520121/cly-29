@@ -1,0 +1,153 @@
+.projectDetail {
+  padding: 24px;
+}
+
+.loadingContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+}
+
+.empty {
+  padding: 60px 0;
+}
+
+.pageHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+  padding: 24px;
+  background: #fff;
+  border-radius: 8px;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.projectTitle {
+  font-size: 24px;
+  font-weight: 600;
+  color: #262626;
+  margin: 0 0 8px 0;
+}
+
+.projectMeta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.metaText {
+  font-size: 13px;
+  color: #8c8c8c;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.headerRight {
+  display: flex;
+  gap: 12px;
+}
+
+.contentCard {
+  border-radius: 8px;
+
+  :global(.ant-card-body) {
+    padding: 0;
+  }
+
+  :global(.ant-tabs-nav) {
+    padding: 0 24px;
+    margin: 0;
+  }
+
+  :global(.ant-tabs-content-holder) {
+    padding: 24px;
+  }
+}
+
+.tabContent {
+  min-height: 400px;
+}
+
+.statsRow {
+  margin-bottom: 16px;
+}
+
+.chartRow {
+  margin-bottom: 0;
+}
+
+.progressSection {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 16px 0;
+}
+
+.progressItem {
+  margin-bottom: 0;
+}
+
+.progressLabel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #595959;
+
+  span:last-child {
+    font-weight: 500;
+    color: #262626;
+  }
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+
+  h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 500;
+  }
+}
+
+.milestoneTitle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  span:first-child {
+    font-weight: 500;
+    color: #262626;
+  }
+}
+
+.milestoneDesc {
+  p {
+    margin: 0 0 4px 0;
+    font-size: 13px;
+    color: #595959;
+  }
+}
+
+.milestoneDate {
+  color: #8c8c8c !important;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.settingsCard {
+  max-width: 800px;
+}
