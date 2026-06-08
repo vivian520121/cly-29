@@ -13,6 +13,7 @@ import Organization from '@/pages/organization/Organization'
 import FileManager from '@/pages/file/FileManager'
 import Profile from '@/pages/profile/Profile'
 import Search from '@/pages/search/Search'
+import Settings from '@/pages/settings/Settings'
 import NotFound from '@/pages/error/NotFound'
 
 const PrivateRoute = ({ children }) => {
@@ -32,6 +33,7 @@ const App = () => {
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="project" element={<ProjectList />} />
         <Route path="project/:id" element={<ProjectDetail />} />
+        <Route path="task" element={<Navigate to="/task/kanban" replace />} />
         <Route path="task/kanban" element={<TaskKanban />} />
         <Route path="task/list" element={<TaskList />} />
         <Route path="task/:id" element={<TaskDetail />} />
@@ -39,6 +41,7 @@ const App = () => {
         <Route path="file" element={<FileManager />} />
         <Route path="profile" element={<Profile />} />
         <Route path="search" element={<Search />} />
+        <Route path="settings" element={<Settings />} />
       </Route>
 
       <Route path="/404" element={<NotFound />} />

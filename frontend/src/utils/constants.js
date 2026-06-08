@@ -53,17 +53,21 @@ export const MENU_ITEMS = [
     label: '工作台',
   },
   {
-    key: '/projects',
+    key: '/project',
     icon: ProjectOutlined,
     label: '项目管理',
   },
   {
-    key: '/tasks',
+    key: '/task',
     icon: CalendarOutlined,
     label: '任务中心',
+    children: [
+      { key: '/task/kanban', label: '看板视图' },
+      { key: '/task/list', label: '列表视图' },
+    ],
   },
   {
-    key: '/files',
+    key: '/file',
     icon: FolderOpenOutlined,
     label: '文件管理',
   },
@@ -71,10 +75,6 @@ export const MENU_ITEMS = [
     key: '/organization',
     icon: TeamOutlined,
     label: '组织架构',
-    children: [
-      { key: '/organization/dept', label: '部门管理' },
-      { key: '/organization/user', label: '用户管理' },
-    ],
   },
   {
     key: '/profile',

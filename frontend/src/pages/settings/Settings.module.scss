@@ -1,0 +1,84 @@
+.settings {
+  padding: 24px;
+}
+
+.loadingContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+}
+
+.companyCard {
+  border-radius: 8px;
+  margin-bottom: 16px;
+
+  :global(.ant-card-body) {
+    padding: 24px;
+  }
+}
+
+.companyInfo {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.companyLogo {
+  width: 120px;
+  height: 120px;
+  border-radius: 8px;
+  background: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  color: #1890ff;
+  flex-shrink: 0;
+}
+
+.companyDetails {
+  flex: 1;
+}
+
+.companyName {
+  font-size: 24px;
+  font-weight: 600;
+  color: #262626;
+  margin-bottom: 8px;
+}
+
+.companyCode {
+  font-size: 14px;
+  color: #8c8c8c;
+  margin-bottom: 16px;
+}
+
+.infoGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px 24px;
+}
+
+.infoItem {
+  display: flex;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.infoLabel {
+  color: #8c8c8c;
+  flex-shrink: 0;
+  min-width: 80px;
+}
+
+.infoValue {
+  color: #262626;
+  flex: 1;
+}
+
+.actionSection {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+}
