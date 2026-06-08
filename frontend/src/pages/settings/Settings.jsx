@@ -20,7 +20,7 @@ import {
   PlusOutlined,
   EditOutlined,
   DeleteOutlined,
-  BuildingOutlined,
+  ApartmentOutlined,
   SettingOutlined,
   GlobalOutlined,
   PhoneOutlined,
@@ -132,7 +132,7 @@ const Settings = () => {
       key: 'name',
       render: (text) => (
         <Space>
-          <BuildingOutlined style={{ color: '#1890ff' }} />
+          <ApartmentOutlined style={{ color: '#1890ff' }} />
           <span>{text}</span>
         </Space>
       )
@@ -207,7 +207,7 @@ const Settings = () => {
             {selectedCompany ? (
               <div className={styles.companyInfo}>
                 <div className={styles.companyLogo}>
-                  <BuildingOutlined />
+                  <ApartmentOutlined />
                 </div>
                 <div className={styles.companyDetails}>
                   <h2 className={styles.companyName}>{selectedCompany.name}</h2>
