@@ -18,6 +18,7 @@ export const useAuthStore = create(
         set({ token: '', userInfo: null })
         localStorage.removeItem('token')
         localStorage.removeItem('userInfo')
+        localStorage.removeItem('auth-storage')
       },
       setUserInfo: (userInfo) => set({ userInfo })
     }),
