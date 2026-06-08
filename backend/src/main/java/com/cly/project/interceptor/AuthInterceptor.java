@@ -13,9 +13,6 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
-import java.util.Arrays;
-import java.util.List;
-
 @Slf4j
 @Component
 @RequiredArgsConstructor
@@ -25,26 +22,9 @@ public class AuthInterceptor implements HandlerInterceptor {
     private final StringRedisTemplate redisTemplate;
     private final ObjectMapper objectMapper;
 
-    private static final List<String> WHITE_LIST = Arrays.asList(
-            "/auth/login",
-            "/auth/register",
-            "/auth/captcha",
-            "/doc.html",
-            "/v3/api-docs",
-            "/v3/api-docs/swagger-config",
-            "/swagger-ui",
-            "/swagger-ui.html",
-            "/webjars",
-            "/favicon.ico"
-    );
-
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        String uri = request.getRequestURI();
-        String contextPath = request.getContextPath();
-        uri = uri.replace(contextPath, "");
-
-        if (isWhiteList(uri)) {
+        if ("OPTIONS".equals(request.getMethod())) {
             return true;
         }
 
@@ -82,10 +62,6 @@ public class AuthInterceptor implements HandlerInterceptor {
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
         UserContext.clear();
-    }
-
-    private boolean isWhiteList(String uri) {
-        return WHITE_LIST.stream().anyMatch(uri::startsWith);
     }
 
     private boolean unauthorized(HttpServletResponse response, String message) throws Exception {

@@ -39,7 +39,7 @@ public class AuthController {
         return Result.success();
     }
 
-    @GetMapping("/info")
+    @GetMapping("/user-info")
     @Operation(summary = "获取当前用户信息")
     @OperationLog(module = "认证管理", operation = "获取当前用户信息", businessType = "QUERY")
     public Result<User> getCurrentUser() {
