@@ -67,6 +67,7 @@ services:
     networks:
       - cly-network
     restart: unless-stopped
+    command: [nginx-debug, '-g', 'daemon off;']
 
 networks:
   cly-network:
