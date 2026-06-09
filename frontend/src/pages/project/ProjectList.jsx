@@ -139,9 +139,8 @@ const ProjectList = () => {
     setEditingProject(project)
     form.setFieldsValue({
       ...project,
-      startDate: project.startDate && project.endDate
-        ? [dayjs(project.startDate), dayjs(project.endDate)]
-        : null
+      startDate: project.startDate ? dayjs(project.startDate) : null,
+      endDate: project.endDate ? dayjs(project.endDate) : null
     })
     setModalVisible(true)
   }
@@ -161,8 +160,8 @@ const ProjectList = () => {
       const values = await form.validateFields()
       const submitData = {
         ...values,
-        startDate: values.startDate?.[0]?.format('YYYY-MM-DD'),
-        endDate: values.startDate?.[1]?.format('YYYY-MM-DD')
+        startDate: values.startDate?.format('YYYY-MM-DD'),
+        endDate: values.endDate?.format('YYYY-MM-DD')
       }
 
       if (editingProject) {
@@ -369,7 +368,7 @@ const ProjectList = () => {
             </Col>
           </Row>
           <Form.Item
-            name="startDate"
+            name={['startDate', 'endDate']}
             label="项目周期"
             rules={[{ required: true, message: '请选择项目周期' }]}
           >
