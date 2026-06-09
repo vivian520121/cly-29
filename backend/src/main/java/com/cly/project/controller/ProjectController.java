@@ -32,6 +32,20 @@ public class ProjectController {
         return Result.success(projectService.page(query));
     }
 
+    @GetMapping("/list")
+    @Operation(summary = "分页查询项目列表")
+    @OperationLog(module = "项目管理", operation = "分页查询项目列表", businessType = "QUERY")
+    public Result<IPage<Project>> list(ProjectQueryDTO query) {
+        return Result.success(projectService.page(query));
+    }
+
+    @GetMapping("/my")
+    @Operation(summary = "获取我参与的项目列表")
+    @OperationLog(module = "项目管理", operation = "获取我参与的项目列表", businessType = "QUERY")
+    public Result<List<Project>> getMyProjects() {
+        return Result.success(projectService.getMyProjects());
+    }
+
     @GetMapping("/{id}")
     @Operation(summary = "查询项目详情")
     @OperationLog(module = "项目管理", operation = "查询项目详情", businessType = "QUERY", businessIdIndex = 0)
@@ -75,12 +89,5 @@ public class ProjectController {
     @OperationLog(module = "项目管理", operation = "获取项目甘特图数据", businessType = "QUERY", businessIdIndex = 0)
     public Result<GanttDataVO> getGanttData(@PathVariable Long id) {
         return Result.success(projectService.getGanttData(id));
-    }
-
-    @GetMapping("/my")
-    @Operation(summary = "获取我参与的项目列表")
-    @OperationLog(module = "项目管理", operation = "获取我参与的项目列表", businessType = "QUERY")
-    public Result<List<Project>> getMyProjects() {
-        return Result.success(projectService.getMyProjects());
     }
 }

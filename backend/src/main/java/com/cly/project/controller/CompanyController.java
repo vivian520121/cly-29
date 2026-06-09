@@ -26,6 +26,13 @@ public class CompanyController {
         return Result.success(companyService.pageList(query, keyword));
     }
 
+    @GetMapping("/list-all")
+    @Operation(summary = "查询所有公司列表")
+    @OperationLog(module = "公司管理", operation = "查询所有公司", businessType = "QUERY")
+    public Result<java.util.List<Company>> listAll() {
+        return Result.success(companyService.listAll());
+    }
+
     @GetMapping("/{id}")
     @Operation(summary = "查询公司详情")
     @OperationLog(module = "公司管理", operation = "查询公司详情", businessType = "QUERY", businessIdIndex = 0)
@@ -55,12 +62,5 @@ public class CompanyController {
     public Result<Void> delete(@PathVariable Long id) {
         companyService.removeCompany(id);
         return Result.success();
-    }
-
-    @GetMapping("/list-all")
-    @Operation(summary = "查询所有公司列表")
-    @OperationLog(module = "公司管理", operation = "查询所有公司", businessType = "QUERY")
-    public Result<java.util.List<Company>> listAll() {
-        return Result.success(companyService.listAll());
     }
 }

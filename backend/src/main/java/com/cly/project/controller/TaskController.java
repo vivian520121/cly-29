@@ -33,18 +33,18 @@ public class TaskController {
         return Result.success(taskService.page(query));
     }
 
+    @GetMapping("/list")
+    @Operation(summary = "分页查询任务列表")
+    @OperationLog(module = "任务管理", operation = "查询任务列表", businessType = "QUERY")
+    public Result<IPage<Task>> list(TaskQueryDTO query) {
+        return Result.success(taskService.page(query));
+    }
+
     @GetMapping("/kanban")
     @Operation(summary = "获取看板数据")
     @OperationLog(module = "任务管理", operation = "获取看板数据", businessType = "QUERY")
     public Result<List<KanbanColumnVO>> getKanbanData(TaskQueryDTO query) {
         return Result.success(taskService.getKanbanData(query));
-    }
-
-    @GetMapping("/{id}")
-    @Operation(summary = "查询任务详情")
-    @OperationLog(module = "任务管理", operation = "查询任务详情", businessType = "QUERY", businessIdIndex = 0)
-    public Result<TaskDetailVO> getById(@PathVariable Long id) {
-        return Result.success(taskService.getDetailById(id));
     }
 
     @GetMapping("/tree/{projectId}")
@@ -59,6 +59,13 @@ public class TaskController {
     @OperationLog(module = "任务管理", operation = "获取我的任务", businessType = "QUERY")
     public Result<List<Task>> getMyTasks() {
         return Result.success(taskService.getMyTasks());
+    }
+
+    @GetMapping("/{id}")
+    @Operation(summary = "查询任务详情")
+    @OperationLog(module = "任务管理", operation = "查询任务详情", businessType = "QUERY", businessIdIndex = 0)
+    public Result<TaskDetailVO> getById(@PathVariable Long id) {
+        return Result.success(taskService.getDetailById(id));
     }
 
     @PostMapping

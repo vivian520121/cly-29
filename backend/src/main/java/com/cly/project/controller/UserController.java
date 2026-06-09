@@ -32,6 +32,27 @@ public class UserController {
         return Result.success(userService.page(query));
     }
 
+    @GetMapping("/list")
+    @Operation(summary = "分页查询用户列表")
+    @OperationLog(module = "用户管理", operation = "查询用户列表", businessType = "QUERY")
+    public Result<IPage<UserVO>> list(UserQueryDTO query) {
+        return Result.success(userService.page(query));
+    }
+
+    @GetMapping("/list-all")
+    @Operation(summary = "查询所有用户列表")
+    @OperationLog(module = "用户管理", operation = "查询所有用户", businessType = "QUERY")
+    public Result<List<User>> listAll() {
+        return Result.success(userService.listAll());
+    }
+
+    @GetMapping("/dept/{deptId}")
+    @Operation(summary = "根据部门ID查询用户")
+    @OperationLog(module = "用户管理", operation = "根据部门查询用户", businessType = "QUERY", businessIdIndex = 0)
+    public Result<List<User>> getUsersByDeptId(@PathVariable Long deptId) {
+        return Result.success(userService.getUsersByDeptId(deptId));
+    }
+
     @GetMapping("/{id}")
     @Operation(summary = "查询用户详情")
     @OperationLog(module = "用户管理", operation = "查询用户详情", businessType = "QUERY", businessIdIndex = 0)
@@ -69,19 +90,5 @@ public class UserController {
     public Result<Void> resetPassword(@RequestBody @Valid ResetPasswordDTO dto) {
         userService.resetPassword(dto.getId(), dto.getNewPassword());
         return Result.success();
-    }
-
-    @GetMapping("/list-all")
-    @Operation(summary = "查询所有用户列表")
-    @OperationLog(module = "用户管理", operation = "查询所有用户", businessType = "QUERY")
-    public Result<List<User>> listAll() {
-        return Result.success(userService.listAll());
-    }
-
-    @GetMapping("/dept/{deptId}")
-    @Operation(summary = "根据部门ID查询用户")
-    @OperationLog(module = "用户管理", operation = "根据部门查询用户", businessType = "QUERY", businessIdIndex = 0)
-    public Result<List<User>> getUsersByDeptId(@PathVariable Long deptId) {
-        return Result.success(userService.getUsersByDeptId(deptId));
     }
 }
