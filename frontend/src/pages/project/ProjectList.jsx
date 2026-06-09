@@ -42,7 +42,7 @@ const { RangePicker } = DatePicker
 
 const statusOptions = [
   { label: '全部状态', value: '' },
-  { label: '未开始', value: 'NOT_STARTED' },
+  { label: '未开始11', value: 'NOT_STARTED' },
   { label: '进行中', value: 'IN_PROGRESS' },
   { label: '已完成', value: 'COMPLETED' },
   { label: '已暂停', value: 'PAUSED' },
@@ -139,8 +139,9 @@ const ProjectList = () => {
     setEditingProject(project)
     form.setFieldsValue({
       ...project,
-      startDate: project.startDate ? dayjs(project.startDate) : null,
-      endDate: project.endDate ? dayjs(project.endDate) : null
+      startDate: project.startDate && project.endDate
+        ? [dayjs(project.startDate), dayjs(project.endDate)]
+        : null
     })
     setModalVisible(true)
   }
@@ -160,8 +161,8 @@ const ProjectList = () => {
       const values = await form.validateFields()
       const submitData = {
         ...values,
-        startDate: values.startDate?.format('YYYY-MM-DD'),
-        endDate: values.endDate?.format('YYYY-MM-DD')
+        startDate: values.startDate?.[0]?.format('YYYY-MM-DD'),
+        endDate: values.startDate?.[1]?.format('YYYY-MM-DD')
       }
 
       if (editingProject) {
@@ -368,7 +369,7 @@ const ProjectList = () => {
             </Col>
           </Row>
           <Form.Item
-            name={['startDate', 'endDate']}
+            name="startDate"
             label="项目周期"
             rules={[{ required: true, message: '请选择项目周期' }]}
           >
