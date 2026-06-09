@@ -36,6 +36,13 @@ public class DashboardController {
         return Result.success(dashboardService.getTodoTasks());
     }
 
+    @GetMapping("/todo-tasks")
+    @Operation(summary = "待办任务")
+    @OperationLog(module = "工作台", operation = "获取待办任务", businessType = "QUERY")
+    public Result<List<Task>> getTodoTasksAlias() {
+        return Result.success(dashboardService.getTodoTasks());
+    }
+
     @GetMapping("/dynamics")
     @Operation(summary = "项目动态")
     @OperationLog(module = "工作台", operation = "获取项目动态", businessType = "QUERY")
@@ -43,10 +50,24 @@ public class DashboardController {
         return Result.success(dashboardService.getProjectDynamics());
     }
 
+    @GetMapping("/activities")
+    @Operation(summary = "项目动态")
+    @OperationLog(module = "工作台", operation = "获取项目动态", businessType = "QUERY")
+    public Result<List<TaskLog>> getProjectActivities() {
+        return Result.success(dashboardService.getProjectDynamics());
+    }
+
     @GetMapping("/statistics")
     @Operation(summary = "统计数据")
     @OperationLog(module = "工作台", operation = "获取统计数据", businessType = "QUERY")
     public Result<StatisticsVO> getStatistics() {
+        return Result.success(dashboardService.getStatistics());
+    }
+
+    @GetMapping("/task-statistics")
+    @Operation(summary = "统计数据")
+    @OperationLog(module = "工作台", operation = "获取统计数据", businessType = "QUERY")
+    public Result<StatisticsVO> getTaskStatistics() {
         return Result.success(dashboardService.getStatistics());
     }
 }

@@ -33,6 +33,13 @@ public class TaskController {
         return Result.success(taskService.page(query));
     }
 
+    @GetMapping("/list")
+    @Operation(summary = "分页查询任务列表")
+    @OperationLog(module = "任务管理", operation = "查询任务列表", businessType = "QUERY")
+    public Result<IPage<Task>> list(TaskQueryDTO query) {
+        return Result.success(taskService.page(query));
+    }
+
     @GetMapping("/kanban")
     @Operation(summary = "获取看板数据")
     @OperationLog(module = "任务管理", operation = "获取看板数据", businessType = "QUERY")
