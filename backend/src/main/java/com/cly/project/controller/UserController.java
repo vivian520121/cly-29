@@ -32,13 +32,6 @@ public class UserController {
         return Result.success(userService.page(query));
     }
 
-    @GetMapping("/list")
-    @Operation(summary = "分页查询用户列表")
-    @OperationLog(module = "用户管理", operation = "查询用户列表", businessType = "QUERY")
-    public Result<IPage<UserVO>> list(UserQueryDTO query) {
-        return Result.success(userService.page(query));
-    }
-
     @GetMapping("/{id}")
     @Operation(summary = "查询用户详情")
     @OperationLog(module = "用户管理", operation = "查询用户详情", businessType = "QUERY", businessIdIndex = 0)

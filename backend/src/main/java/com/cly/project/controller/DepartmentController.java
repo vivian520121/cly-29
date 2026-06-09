@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/department")
+@RequestMapping("/dept")
 @RequiredArgsConstructor
 @Tag(name = "部门管理", description = "部门信息管理接口")
 public class DepartmentController {
