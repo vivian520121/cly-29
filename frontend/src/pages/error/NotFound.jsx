@@ -36,7 +36,7 @@ const NotFound = () => {
                 页面未找到
               </Title>
               <Text type="secondary" className={styles.subtitle}>
-                抱歉，您访问的页面不存在或已被移除3242433
+                抱歉，您访问的页面不存在或已被移除
               </Text>
             </div>
           }
